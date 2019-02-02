@@ -7,7 +7,7 @@ const Comment = ({ user, text, i, remove, postId }) => (
       <strong>{user}</strong>
       {text}
       <button
-        onClick={() => remove(null, postId, i)}
+        onClick={() => remove(postId, i)}
         className="remove-comment"
         type="button"
       >

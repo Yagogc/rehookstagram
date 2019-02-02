@@ -2,16 +2,6 @@ import commentsData from '../data/comments'
 
 const initialState = { ...commentsData }
 
-const comments = (state = initialState, action) => {
-  if (typeof action.postId !== 'undefined') {
-    return {
-      ...state,
-      [action.postId]: postComments(state[action.postId], action),
-    }
-  }
-  return state
-}
-
 const postComments = (state = [], action) => {
   switch (action.type) {
     case 'ADD_COMMENT':
@@ -27,6 +17,16 @@ const postComments = (state = [], action) => {
     default:
       return state
   }
+}
+
+const comments = (state = initialState, action) => {
+  if (typeof action.postId !== 'undefined') {
+    return {
+      ...state,
+      [action.postId]: postComments(state[action.postId], action),
+    }
+  }
+  return state
 }
 
 export default comments
