@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Main = () => (
   <div>
     <h1>
-      <Link to="/">Reduxstagram</Link>
+      <Link to="/">Rehookstagram</Link>
     </h1>
   </div>
 )
