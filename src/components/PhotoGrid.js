@@ -1,16 +1,24 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import * as actions from '../actions/actions'
 import Photo from './Photo'
 
-const PhotoGrid = props => (
-  <div className="photo-grid">
-    {props.posts.map((post, i) => (
-      <Photo {...props} key={i} i={i} post={post} />
-    ))}
-  </div>
-)
+const PhotoGrid = props => {
+  const { posts } = props
+  return (
+    <div className="photo-grid">
+      {posts.map((post, i) => (
+        <Photo {...props} key={i.toString()} i={i} post={post} />
+      ))}
+    </div>
+  )
+}
+
+PhotoGrid.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+}
 
 function mapStateToProps(state) {
   return {

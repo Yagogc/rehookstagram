@@ -1,18 +1,20 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import Photo from './Photo'
 import Comments from './Comments'
 import * as actions from '../actions/actions'
 
 const Single = props => {
-  const { postId } = props.match.params
+  const { match, posts, comments } = props
+  const { postId } = match.params
 
-  const i = props.posts.findIndex(post => post.code === postId)
+  const i = posts.findIndex(post => post.code === postId)
 
-  const post = props.posts[i] || []
+  const post = posts[i] || []
 
-  const postComments = props.comments[postId]
+  const postComments = comments[postId]
 
   return (
     <div className="single-photo">
@@ -21,6 +23,17 @@ const Single = props => {
     </div>
   )
 }
+
+Single.propTypes = {
+  comments: PropTypes.objectOf(PropTypes.array).isRequired,
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  match: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.object,
+  ]).isRequired,
+}
+
 function mapStateToProps(state) {
   return {
     posts: state.posts,
