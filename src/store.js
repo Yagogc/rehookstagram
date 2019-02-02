@@ -12,6 +12,7 @@ const reducers = combineReducers({
 
 const store = createStore(
   reducers,
+  // eslint-disable-next-line
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 

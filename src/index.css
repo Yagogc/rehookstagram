@@ -215,6 +215,33 @@ h1 {
   text-shadow: 0px 4px 0 rgba(18, 86, 136, 0.11);
 }
 
+@media (max-width: 768px) {
+  h1 {
+    font-size: 6rem;
+  }
+
+  .grid-figure {
+    flex-basis: calc(100% - 4rem);
+  }
+
+  .single-photo {
+    flex-direction: column;
+  }
+
+  .single-photo .grid-figure {
+    box-shadow: none;
+    margin: 0 0 2rem 0;
+    flex: 1;
+    max-width: 100%;
+  }
+
+  .single-photo .comments {
+    flex: 1;
+    max-width: 100%;
+  }
+}
+
+
 h1 a {
   color: #125688;
   text-decoration: none;
