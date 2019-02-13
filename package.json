@@ -9,6 +9,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "history": "^4.7.2",
+    "prettier": "^1.16.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
     "react-addons-css-transition-group": "^15.6.2",
