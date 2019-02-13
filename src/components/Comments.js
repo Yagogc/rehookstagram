@@ -1,13 +1,15 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import PropTypes from 'prop-types'
+import { CommentsContext } from '../context/CommentsContext'
+import { addComment, removeComment } from '../actions/actions'
 
-const Comment = ({ user, text, i, remove, postId }) => (
+const Comment = ({ user, text, i, dispatch, postId }) => (
   <div className="comment" key={i}>
     <p>
       <strong>{user}</strong>
       {text}
       <button
-        onClick={() => remove(postId, i)}
+        onClick={() => dispatch(removeComment(postId, i))}
         className="remove-comment"
         type="button"
       >
@@ -21,32 +23,33 @@ Comment.propTypes = {
   user: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   i: PropTypes.number.isRequired,
-  remove: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   postId: PropTypes.string.isRequired,
 }
 
-const Comments = ({ match, postComments, addComment, removeComment }) => {
+const Comments = ({ match, comments }) => {
   const formRef = useRef(null)
   const authorRef = useRef(null)
   const commentRef = useRef(null)
+  const { dispatch } = useContext(CommentsContext)
   const { postId } = match.params
 
   const handleSubmit = e => {
     e.preventDefault()
     const authorValue = authorRef.current.value
     const commentValue = commentRef.current.value
-    addComment(postId, authorValue, commentValue)
+    dispatch(addComment(postId, authorValue, commentValue))
     formRef.current.reset()
   }
 
   return (
     <div className="comments">
-      {postComments.map((comment, i) => (
+      {comments.map((comment, i) => (
         <Comment
           {...comment}
           key={`comment-${i.toString()}`}
           i={i}
-          remove={removeComment}
+          dispatch={dispatch}
           postId={postId}
         />
       ))}
@@ -60,9 +63,7 @@ const Comments = ({ match, postComments, addComment, removeComment }) => {
 }
 
 Comments.propTypes = {
-  postComments: PropTypes.arrayOf(PropTypes.object),
-  removeComment: PropTypes.func.isRequired,
-  addComment: PropTypes.func.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.object),
   match: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
@@ -70,7 +71,7 @@ Comments.propTypes = {
   ]).isRequired,
 }
 Comments.defaultProps = {
-  postComments: [],
+  comments: [],
 }
 
 export default Comments
