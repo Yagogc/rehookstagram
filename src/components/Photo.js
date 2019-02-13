@@ -8,8 +8,7 @@ const Photo = ({ post, i, comments, increment }) => (
     <div className="grid-photo-wrap">
       <Link to={`/view/${post.code}`}>
         <img
-          // src={post.display_src}
-          src={`https://loremflickr.com/400/400?random=${i}`}
+          src={`https://picsum.photos/400/400/?random?image=${i}`}
           alt={post.caption}
           className="grid-photo"
         />
